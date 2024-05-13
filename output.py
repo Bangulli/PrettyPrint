@@ -1,7 +1,7 @@
-import objects
+import format
 import time
 
-class Out:
+class Printer:
     def __init__(self, log_type=None, timestamps=False):
         '''
         Initialize the the Outputter. On call takes a text and prints it to console with the specified formatting
@@ -19,10 +19,10 @@ class Out:
         else:
             self.log = None
 
-        self._colours = objects.Colour()
+        self._formats = format.FormatKeys()
         self.timestamps = timestamps
 
-    def __call__(self, msg, colour='white', bold=False, underline=False):
+    def __call__(self, msg, colour='reset', bold=False, underline=False):
         '''
         Prints a formatted message to the console and logs it to a file if log_type is {html, txt}
         :param msg: String The text to be printed
@@ -31,26 +31,32 @@ class Out:
         :param underline: Bool Controls if the message should be underlined
         :return:
         '''
-        colour_tag = self._colours.cLookup[colour] if type(colour) == str else self._colours.cLookup['white'] # get the colour form the palate, default to white if input wrong
+        if self._formats.fmtKeyExists(colour):
+            colour_tag = self._formats.fmtLookup[colour]
+        else:
+            colour_tag = self._formats.fmtLookup['reset']
         if self.timestamps:
             msg = time.strftime("%Y-%m-%d-%H:%M:%S - ")+msg
         if not bold or not underline:
-            print(f"{colour_tag}{msg}{self._colours.WHITE}")
+            print(f"{colour_tag}{msg}{self._formats.RESET}")
             if self.log is not None:
                 if self.log_type == 'html':
                     self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
                 elif self.log_type == 'txt':
                     self.log.write(msg+'\n')
         elif bold ^ underline:
-            formatter = self._colours.BOLD if bold else self._colours.UNDERLINE
-            print(f"{colour_tag}{formatter}{msg}{self._colours.WHITE}")
+            if bold:
+                formatter = self._formats.BOLD
+            else:
+                formatter = self._formats.UNDERLINE
+            print(f"{colour_tag}{formatter}{msg}{self._formats.RESET}")
             if self.log is not None:
                 if self.log_type == 'html':
                     self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
                 elif self.log_type == 'txt':
                     self.log.write(msg+'\n')
         elif bold & underline:
-            print(f"{colour_tag}{self._colours.BOLD}{self._colours.UNDERLINE}{msg}{self._colours.WHITE}")
+            print(f"{colour_tag}{self._formats.BOLD}{self._formats.UNDERLINE}{msg}{self._formats.RESET}")
             if self.log is not None:
                 if self.log_type == 'html':
                     self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
@@ -67,3 +73,31 @@ class Out:
                 html_closing_str = '    </body>\n</html>'
                 self.log.write(html_closing_str)
             self.log.close()
+
+    def _tagged_print(self, msg, tag, colour):
+        '''
+        Prints a message with a bold and underlined tag
+        :param msg: String message to print
+        :param tag: String tag to print
+        :param colour: String colour to print
+        :return:
+        '''
+        colour = self._formats.fmtLookup[colour] # get colour code
+        if self.timestamps: #
+            tag_fmt = f"""{colour}{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{self._formats.fmt_query(['bold','underline'])}{tag}{self._formats.RESET}{colour}:"""
+        else:
+            tag_fmt = f"{colour}{self._formats.fmt_query(['bold','underline'])}{tag}{self._formats.RESET}{colour}:"
+        msg_fmt = f"{msg}{self._formats.RESET}"
+        print(tag_fmt, msg_fmt)
+
+    def warning(self, msg):
+        self._tagged_print(msg, 'WARNING', 'yellow')
+
+    def error(self, msg):
+        self._tagged_print(msg, 'ERROR', 'red')
+
+    def success(self, msg):
+        self._tagged_print(msg, 'SUCCESS', 'green')
+
+    def fail(self, msg):
+        self._tagged_print(msg, 'FAIL', 'red')
