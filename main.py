@@ -3,7 +3,7 @@ import time
 import PrettyPrint as pp
 bar = objects.ProgressBar(1, '#')
 printer = pp.Out()
-for i in range (100):
+for i in range (5):
     #bar.update()
     time.sleep(1)
-    printer('peter', 'blue', False, True)
+    printer('peter', 'blue', timestamp=True)
