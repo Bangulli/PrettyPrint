@@ -1,5 +1,6 @@
 import format
 import time
+import ansi_util
 
 class Printer:
     def __init__(self, log_type=None, timestamps=False):
@@ -61,6 +62,7 @@ class Printer:
                 self.log.write(html_closing_str)
             self.log.close()
 
+
     def _tagged_print(self, msg, tag, colour):
         '''
         Prints a message with a bold and underlined tag
@@ -88,3 +90,4 @@ class Printer:
 
     def fail(self, msg):
         self._tagged_print(msg, 'FAIL', 'red')
+
