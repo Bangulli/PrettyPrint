@@ -19,16 +19,13 @@ class Printer:
         else:
             self.log = None
 
-        self._formats = format.FormatKeys()
         self.timestamps = timestamps
 
-    def __call__(self, msg, colour='reset', bold=False, underline=False):
+    def __call__(self, msg, fmt=None):
         '''
         Prints a formatted message to the console and logs it to a file if log_type is {html, txt}
         :param msg: String The text to be printed
-        :param colour: String The colour of the printout {red, blue, green, yellow, white, cyan}
-        :param bold: Bool Controls if the message should be bold
-        :param underline: Bool Controls if the message should be underlined
+        :param fmt: String The format to print with, constructed using Builder.Compose() with the ansi_util callables.
         :return:
         '''
         if self._formats.fmtKeyExists(colour):

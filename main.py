@@ -1,11 +1,12 @@
 import patterns
 import time
 import output as out
+import numpy as np
 
-bar = patterns.ProgressBar(20, 20, '=')
+iterable = np.arange(1000)
+bar = patterns.ProgressBar(iterable, 20, '=')
 printer = out.Printer(timestamps=True)
-for i in range (20):
-    bar.update()
-    time.sleep(1)
-    #printer.error('printed successfully')
-    #printer('peter', 'cyan', underline=True, bold=True)
+for elem in bar:
+    #print(elem)
+    time.sleep(0.01)
+

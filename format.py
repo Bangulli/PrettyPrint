@@ -28,7 +28,7 @@ class FormatKeys:
                 if self.fmt_key_exists(elem):
                     fmt_string += self.fmtLookup[elem]
                 else:
-                    pass
+                    raise TypeError('This format lookup key doesnt exist: {}'.format(elem))
             return fmt_string
 
     def fmt_key_exists(self, key):
