@@ -10,6 +10,18 @@ COLOURS = {
     "white": 7
 }
 
+EFFECTS = {
+    "reset": "\033[0m",
+    "bold": "\033[1m",
+    "dim": "\033[2m",
+    "italic": "\033[3m",
+    "underline": "\033[4m",
+    "blink": "\033[5m",
+    "inverse": "\033[7m",
+    "hidden": "\033[8m",
+    "strikethrough": "\033[9m"
+}
+
 
 class Text:
     def __init__(self, colour='default', option='default'):
@@ -70,56 +82,6 @@ class Background:
 class Effect:
     def __init__(self, effect):
         self.effect = effect
-        self.effects = {
-            "reset": "\033[0m",
-            "bold": "\033[1m",
-            "dim": "\033[2m",
-            "italic": "\033[3m",
-            "underline": "\033[4m",
-            "blink": "\033[5m",
-            "inverse": "\033[7m",
-            "hidden": "\033[8m",
-            "strikethrough": "\033[9m"
-        }
 
     def __call__(self):
         return
-
-ansi_escape_sequences = {
-    "default_text": "\033[39m",
-    "black_text": "\033[30m",
-    "red_text": "\033[31m",
-    "green_text": "\033[32m",
-    "yellow_text": "\033[33m",
-    "blue_text": "\033[34m",
-    "magenta_text": "\033[35m",
-    "cyan_text": "\033[36m",
-    "white_text": "\033[37m",
-    "default_background": "\033[49m",
-    "black_background": "\033[40m",
-    "red_background": "\033[41m",
-    "green_background": "\033[42m",
-    "yellow_background": "\033[43m",
-    "blue_background": "\033[44m",
-    "magenta_background": "\033[45m",
-    "cyan_background": "\033[46m",
-    "white_background": "\033[47m",
-    "bright_black_text": "\033[90m",
-    "bright_red_text": "\033[91m",
-    "bright_green_text": "\033[92m",
-    "bright_yellow_text": "\033[93m",
-    "bright_blue_text": "\033[94m",
-    "bright_magenta_text": "\033[95m",
-    "bright_cyan_text": "\033[96m",
-    "bright_white_text": "\033[97m",
-    "bright_black_background": "\033[100m",
-    "bright_red_background": "\033[101m",
-    "bright_green_background": "\033[102m",
-    "bright_yellow_background": "\033[103m",
-    "bright_blue_background": "\033[104m",
-    "bright_magenta_background": "\033[105m",
-    "bright_cyan_background": "\033[106m",
-    "bright_white_background": "\033[107m",
-    "rgb_text": rgb_text,
-    "rgb_background": rgb_background
-}

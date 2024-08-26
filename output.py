@@ -28,37 +28,27 @@ class Printer:
         :param fmt: String The format to print with, constructed using Builder.Compose() with the ansi_util callables.
         :return:
         '''
-        if self._formats.fmtKeyExists(colour):
-            colour_tag = self._formats.fmtLookup[colour]
+        if isinstance(fmt, format.PPFormat):
+            formatter = str(fmt)
+        elif fmt is None:
+            formatter = "\033[0m"
         else:
-            colour_tag = self._formats.fmtLookup['reset']
+            raise ValueError(
+                f"fmt is not a suppoerted datastructure, expected format.PPFormat or None, got {str(type(fmt))} instead")
+
         if self.timestamps:
             msg = time.strftime("%Y-%m-%d-%H:%M:%S - ")+msg
-        if not bold or not underline:
-            print(f"{colour_tag}{msg}{self._formats.RESET}")
-            if self.log is not None:
-                if self.log_type == 'html':
-                    self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
-                elif self.log_type == 'txt':
-                    self.log.write(msg+'\n')
-        elif bold ^ underline:
-            if bold:
-                formatter = self._formats.BOLD
-            else:
-                formatter = self._formats.UNDERLINE
-            print(f"{colour_tag}{formatter}{msg}{self._formats.RESET}")
-            if self.log is not None:
-                if self.log_type == 'html':
-                    self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
-                elif self.log_type == 'txt':
-                    self.log.write(msg+'\n')
-        elif bold & underline:
-            print(f"{colour_tag}{self._formats.BOLD}{self._formats.UNDERLINE}{msg}{self._formats.RESET}")
-            if self.log is not None:
-                if self.log_type == 'html':
-                    self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
-                elif self.log_type == 'txt':
-                    self.log.write(msg+'\n')
+
+        print(f"{formatter}{msg}\033[0m")
+
+        if self.log is not None:
+            if self.log_type == 'html':
+                #self.log.write("""      <p style="color: {}; font-family: 'Liberation Sans',sans-serif">{}</p>\n""".format(colour, msg))
+                self.log.write(msg + '\n')
+
+            elif self.log_type == 'txt':
+                self.log.write(msg+'\n')
+
 
     def __del__(self):
         '''
