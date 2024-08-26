@@ -1,11 +1,11 @@
 import format
 import time
-import ansi_util
+import ansi
 
 class Printer:
     def __init__(self, log_type=None, timestamps=False):
         '''
-        Initialize the the Outputter. On call takes a text and prints it to console with the specified formatting
+        Initialize the Outputter. On call takes a text and prints it to console with the specified formatting
         Also logs everything to a file if log_type is {html, txt}
         :param log_type: the type of logfile created, if None, no file is created. if 'html' formatted html, if 'txt' plain text txt
         :param timestamps: controls whether to print timestamps before each output

@@ -1,7 +1,6 @@
 import patterns
-import time
 import format
-import ansi_util
+import ansi
 import output as out
 import numpy as np
 
@@ -14,5 +13,10 @@ for elem in bar:
 '''
 
 printer = out.Printer()
-fmt = format.PPFormat([ansi_util.Text('red'), ansi_util.Background('green')])
-printer('peter', fmt)
+'''
+fmt = format.PPFormat([ ansi_util.Font('font2')])
+printer('peter', fmt)'''
+
+for key in ansi._EFFECTS:
+    printer(key, format.PPFormat([format.ColourText([255,100,100]), format.Effect(key)]))
+    print('\n')
