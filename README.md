@@ -12,6 +12,7 @@ This is my first ever package so be nice please
 - Reporting
   - ProgressBar
   - RunningIndicator
+- Licence
 
 ## Printing 
 To use the ANSI printing features first import the package and create a Printer object.
@@ -86,6 +87,7 @@ The main purpose of this package is to avoid having to build these sequences by 
   - double_underline: thick underlines
   - framed: encircles the text
   - encircled: same as above but with round corners
+  
 ### PPFormat
 Each of these options are objects that return an ANSI sequence on call, according to the specification on initialization.
 You could technically use these objects by themselves and just get the sequence and append your message to it. In PrettyPrint however the PPFormat object is used to tie multiple options together and build a formatter to be passed to the Printer´s fmt argument.
@@ -128,6 +130,11 @@ Progress Bar takes 3 arguments:
 
 The ProgressBar printout also gives information about the average time a loop takes, how much time has passed and how much time is approximately left until completion. All the time is presented in seconds (time formatting to H:M:S is WIP, colour support is WIP)
 
+    from PrettyPrint import *
+    import time
+    for i in ProgressBar(range(1000), bins=10, symbol='=')
+        time.sleep(0.1)
+
 ### RunningIndicator
 The RunningIndicator object is designed to indicate whether your potentially infinite while loop is actually running or hung up somewhere, without spamming the console with a 'running' printout every loop (*cough cough*)
 
@@ -135,4 +142,16 @@ The printout features a little animation and information about avg time per loop
 - mode: String, optional, default = 'dots'
   - controls the kind of animation to indicate the running loop: 'dots' or 'rotate'
 - update_frq: Int, optional, default = 1
-  - controls the update frequency of the output, in number of iterations. The output is updated every n iterations
+  - controls the update frequency of the output, in number of iterations. The output is updated every n 
+
+
+    from PrettyPrint import *
+    import time
+    indicator = RunningIndicator(mode='dots', update_frq='100')
+    while 1:
+        indicator()
+        time.sleep(0.1)
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
