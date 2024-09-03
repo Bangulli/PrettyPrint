@@ -1,9 +1,17 @@
 # PrettyPrint - Yassify your console logs
 
 This is the PrettyPrint package. It essentially wraps the ANSI escape sequences into an easy to use framework and provides some useful features for logging and status reporting in the console.<br>
-This is my first ever package so be nice pls ; _ ;
+This is my first ever package so be nice please
 
 ## Contents
+- Printing
+- Formatting
+  - Options
+  - PPFormat
+- Logging
+- Reporting
+  - ProgressBar
+  - RunningIndicator
 
 ## Printing 
 To use the ANSI printing features first import the package and create a Printer object.
@@ -100,3 +108,31 @@ Valid log_types are:
 - 'html' = Html file, colour support is work in progress
 
 ## Reporting
+This module features some useful status reporting tools for your loops.
+
+### ProgressBar
+The ProgressBar object is intended to run with for-loops. It wraps an interable object into a new iterable ProgressBar object, that will update a progress bar in the console print according to the specification.
+
+In python each for loop is essentially a foreach loop, since range(n) is essentially just an array [0,1,...,n], hence the for i in range() syntax
+ProgressBar works with any iterable like range, list or a numpy array.
+Progress Bar takes 3 arguments:
+- underlying_iterable: Iterable, required
+  - the underlying object from the foreach loop like range(n) for example
+- bins: Int, optional, default = 10
+  - controls how many characters the full bar has and how big the update increment is. Has to be between 1 and 100.
+  - 10 means that the bar consists of 10 characters at full length and will be updated in increments of 10% of work done
+  - 20 means that the bar consists of 20 characters at full length and will be updated in increments of 5% of work done
+  - ...
+- symbol: String, optional, default = '='
+  - controls what character is used to draw the progress bar
+
+The ProgressBar printout also gives information about the average time a loop takes, how much time has passed and how much time is approximately left until completion. All the time is presented in seconds (time formatting to H:M:S is WIP, colour support is WIP)
+
+### RunningIndicator
+The RunningIndicator object is designed to indicate whether your potentially infinite while loop is actually running or hung up somewhere, without spamming the console with a 'running' printout every loop (*cough cough*)
+
+The printout features a little animation and information about avg time per loop and time elapsed. To use it simply instantiate a RunningIndicator object and call it on every iteration. The printout will be updated according to the arguments:
+- mode: String, optional, default = 'dots'
+  - controls the kind of animation to indicate the running loop: 'dots' or 'rotate'
+- update_frq: Int, optional, default = 1
+  - controls the update frequency of the output, in number of iterations. The output is updated every n iterations
