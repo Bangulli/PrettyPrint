@@ -16,6 +16,11 @@ This is my first ever package so be nice please
 - Licence
 
 ## Installation
+This project is available on pypi at: https://pypi.org/project/PrettyPrintout/0.0.1/
+
+To install just run
+
+    pip install prettyprintout
 
 ## Printing 
 To use the ANSI printing features first import the package and create a Printer object.

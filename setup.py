@@ -7,7 +7,7 @@ LONG_DESCRIPTION = 'This Package uses the ANSI escape sequences to format consol
 # Setting up
 setup(
     # the name must match the folder name 'verysimplemodule'
-    name="PrettyPrint",
+    name="PrettyPrintout",
     version=VERSION,
     author="Lorenz Kuhn",
     author_email="<lorenz.achim.kuhn@gmail.com>",
