@@ -4,6 +4,7 @@ This is the PrettyPrint package. It essentially wraps the ANSI escape sequences 
 This is my first ever package so be nice please
 
 ## Contents
+- Installation
 - Printing
 - Formatting
   - Options
@@ -13,6 +14,8 @@ This is my first ever package so be nice please
   - ProgressBar
   - RunningIndicator
 - Licence
+
+## Installation
 
 ## Printing 
 To use the ANSI printing features first import the package and create a Printer object.
@@ -130,9 +133,9 @@ Progress Bar takes 3 arguments:
 
 The ProgressBar printout also gives information about the average time a loop takes, how much time has passed and how much time is approximately left until completion. All the time is presented in seconds (time formatting to H:M:S is WIP, colour support is WIP)
 
-    from PrettyPrint import *
+    from PrettyPrint.figures import *
     import time
-    for i in ProgressBar(range(1000), bins=10, symbol='=')
+    for i in ProgressBar(range(1000), bins=10, symbol='='):
         time.sleep(0.1)
 
 ### RunningIndicator
@@ -145,9 +148,9 @@ The printout features a little animation and information about avg time per loop
   - controls the update frequency of the output, in number of iterations. The output is updated every n 
 
 
-    from PrettyPrint import *
+    from PrettyPrint.figures import *
     import time
-    indicator = RunningIndicator(mode='dots', update_frq='100')
+    indicator = RunningIndicator(mode='dots', update_frq=100)
     while 1:
         indicator()
         time.sleep(0.1)
