@@ -1,19 +1,7 @@
-
-import PrettyPrint.figures as fig
+from PrettyPrint.figures import *
 import time
-indicator = fig.RunningIndicator(mode='rotate', update_frq=1)
+
+indicator = RunningIndicator(mode='dots', update_frq=100)
 while 1:
     indicator()
-    time.sleep(0.5)
-
-
-'''
-from PrettyPrint import *
-printer = Printer()
-printer('hello world')
-iterable = range(1000)
-bar = ProgressBar(iterable, 20)
-for i in bar:
-    time.sleep(0.5)
-'''
-
+    time.sleep(0.1)

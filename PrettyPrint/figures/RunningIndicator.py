@@ -27,6 +27,17 @@ class RunningIndicator:
 
     def __call__(self):
         self._iter += 1 # count passed iters
+        if self._iter == 1:
+            self._time_elapsed = time.time() - self._start_time  # update elapsed time
+            self._avg_iter_time = self._time_elapsed / self._iter  # update average time per loop
+
+            sys.stdout.write('\r')  # resets the cursor
+            sys.stdout.write(
+                self._formatter % (self._chars[self._state], self._avg_iter_time, self._time_elapsed))  # prints the msg
+            sys.stdout.flush()
+
+            # update internal state
+            self._state += 1
 
         if self._iter % self._update_frq == 0: # check if frq time is met
             self._time_elapsed = time.time() - self._start_time  # update elapsed time
