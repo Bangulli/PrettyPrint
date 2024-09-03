@@ -1,4 +1,6 @@
-import ansi
+from PrettyPrint import ansi
+
+
 class ColourText:
     def __init__(self, colour='default', option='default'):
         if isinstance(colour, str):
@@ -104,11 +106,11 @@ class PPFormat:
             raise TypeError('The passed variable is not a list of callables.')
 
 
-    def _is_list_of_callables(self, variable):
+    def _is_list_of_callables(self, variable) -> bool:
         '''
         Checks if the passed argument is a list of callables
         :param variable: the argument to check
-        :return:
+        :return: bool
         '''
         if isinstance(variable, list) and all(callable(item) for item in variable):
             return True

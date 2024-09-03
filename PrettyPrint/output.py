@@ -1,6 +1,8 @@
-import format
+import sys
+
+import PrettyPrint.format as format
 import time
-import ansi
+
 
 class Printer:
     def __init__(self, log_type=None, timestamps=False):
@@ -40,7 +42,7 @@ class Printer:
         if self.timestamps:
             msg = time.strftime("%Y-%m-%d-%H:%M:%S - ")+msg
 
-        print(f"{formatter}{msg}\033[0m")
+        sys.stdout.write(f"{formatter}{msg}\033[0m\n")
 
         if self.log is not None:
             if self.log_type == 'html':
