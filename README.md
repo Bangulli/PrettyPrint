@@ -4,18 +4,18 @@ This is the PrettyPrint package. It essentially wraps the ANSI escape sequences 
 This is my first ever package so be nice please
 
 ## Contents
-- [Installation](##Installation)
-- [Printing](##Printing)
-  - [Tagged Prints](###Tagged Prints)
-- [Formatting](##Formatting)
-  - [Options](###Options)
-  - [PPFormat](###PPFormat)
-  - [Presets](###Presets)
-- [Logging](##Logging)
-- [Reporting](##Reporting)
-  - [ProgressBar](##ProgressBar)
-  - [RunningIndicator](##RunningIndicator)
-- [Licence](##Licence)
+- [Installation](#Installation)
+- [Printing](#Printing)
+  - [Tagged Prints](#TaggedPrints)
+- [Formatting](#Formatting)
+  - [Options](#Options)
+  - [PPFormat](#PPFormat)
+  - [Presets](#Presets)
+- [Logging](#Logging)
+- [Reporting](#Reporting)
+  - [ProgressBar](#ProgressBar)
+  - [RunningIndicator](#RunningIndicator)
+- [Licence](#Licence)
 
 ## Installation
 This project is available on pypi at: https://pypi.org/project/PrettyPrintout/0.0.1/
@@ -192,8 +192,9 @@ The printout features a little animation and information about avg time per loop
 - mode: String, optional, default = 'dots'
   - controls the kind of animation to indicate the running loop: 'dots' or 'rotate'
 - update_frq: Int, optional, default = 1
-  - controls the update frequency of the output, in number of iterations. The output is updated every n 
+  - controls the update frequency of the output, in number of iterations. The output is updated every n
 
+usage:
 
     from PrettyPrint.figures import *
     import time
