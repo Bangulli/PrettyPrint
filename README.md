@@ -6,7 +6,7 @@ This is my first ever package so be nice please
 ## Contents
 - [Installation](#Installation)
 - [Printing](#Printing)
-  - [Tagged Prints](#TaggedPrints)
+  - [Tagged Prints](#Tagged-Prints)
 - [Formatting](#Formatting)
   - [Options](#Options)
   - [PPFormat](#PPFormat)
@@ -32,7 +32,7 @@ Printer has two arguments:
 - timestamps: Bool, default False <br> False = no timestamps <br> True = Y-M-D-H:M:S timestamps each time printer gets called
 
 To print something simply call the Printer object with your message as the argument
-For employing different formats pass the fmt argument on call with your desired formatting configuration. See [Formatting](##Formatting) for more info.
+For employing different formats pass the fmt argument on call with your desired formatting configuration. See [Formatting](#Formatting) for more info.
 
     import PrettyPrint
     printer = PrettyPrint.Printer(log_type='txt', timestamps=True) # initialize printer object
