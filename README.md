@@ -4,16 +4,16 @@ This is the PrettyPrint package. It essentially wraps the ANSI escape sequences 
 This is my first ever package so be nice please
 
 ## Contents
-- Installation
-- Printing
-- Formatting
-  - Options
-  - PPFormat
-- Logging
-- Reporting
-  - ProgressBar
-  - RunningIndicator
-- Licence
+- [Installation](##Installation)
+- [Printing](##Printing)
+- [Formatting](##Formatting)
+  - [Options](###Options)
+  - [PPFormat](###PPFormat)
+- [Logging](##Logging)
+- [Reporting](##Reporting)
+  - [ProgressBar](##ProgressBar)
+  - [RunningIndicator](##RunningIndicator)
+- [Licence](##Licence)
 
 ## Installation
 This project is available on pypi at: https://pypi.org/project/PrettyPrintout/0.0.1/
@@ -30,7 +30,7 @@ Printer has two arguments:
 - timestamps: Bool, default False <br> False = no timestamps <br> True = Y-M-D-H:M:S timestamps each time printer gets called
 
 To print something simply call the Printer object with your message as the argument
-For employing different formats pass the fmt argument on call with your desired formatting configuration. See Formatting for more info.
+For employing different formats pass the fmt argument on call with your desired formatting configuration. See [Formatting](##Formatting) for more info.
 
     import PrettyPrint
     printer = PrettyPrint.Printer(log_type='txt', timestamps=True) # initialize printer object
