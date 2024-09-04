@@ -118,3 +118,19 @@ class PPFormat:
 
     def __str__(self):
         return self.format
+
+class Warning(PPFormat):
+    def __init__(self):
+        super().__init__([ColourText('yellow'),Effect('underlined'),Effect('bold')])
+
+class Default(PPFormat):
+    def __init__(self):
+        super().__init__([Effect('reset')])
+
+class Error(PPFormat):
+    def __init__(self):
+        super().__init__([ColourText('red'),Effect('underlined'),Effect('bold')])
+
+class Success(PPFormat):
+    def __init__(self):
+        super().__init__([ColourText('green'),Effect('underlined'),Effect('bold')])

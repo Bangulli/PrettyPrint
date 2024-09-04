@@ -40,9 +40,9 @@ class Printer:
                 f"fmt is not a suppoerted datastructure, expected format.PPFormat or None, got {str(type(fmt))} instead")
 
         if self.timestamps:
-            msg = time.strftime("%Y-%m-%d-%H:%M:%S - ")+msg
-
-        sys.stdout.write(f"{formatter}{msg}\033[0m\n")
+            sys.stdout.write(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{formatter}{msg}\033[0m\n""")
+        else:
+            sys.stdout.write(f"{formatter}{msg}\033[0m\n")
 
         if self.log is not None:
             if self.log_type == 'html':
@@ -65,31 +65,31 @@ class Printer:
             self.log.close()
 
 
-    def _tagged_print(self, msg, tag, colour):
-        '''
-        Prints a message with a bold and underlined tag
-        :param msg: String message to print
-        :param tag: String tag to print
-        :param colour: String colour to print
-        :return:
-        '''
-        colour = self._formats.fmtLookup[colour] # get colour code
-        if self.timestamps: #
-            tag_fmt = f"""{colour}{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{self._formats.fmt_query(['bold','underline'])}{tag}{self._formats.RESET}{colour}:"""
+    def tagged_print(self, tag, msg, tag_fmt, msg_fmt=format.Default()):
+        if isinstance(tag_fmt, format.PPFormat):
+            tag_fmt = str(tag_fmt)
         else:
-            tag_fmt = f"{colour}{self._formats.fmt_query(['bold','underline'])}{tag}{self._formats.RESET}{colour}:"
-        msg_fmt = f"{msg}{self._formats.RESET}"
-        print(tag_fmt, msg_fmt)
+            raise TypeError(f"Unbrecognized type for tag format: {type(tag_fmt)}")
+        if isinstance(msg_fmt, format.PPFormat):
+            msg_fmt = str(msg_fmt)
+        else:
+            raise TypeError(f"Unbrecognized type for message format: {type(msg_fmt)}")
+
+        if self.timestamps: #
+            sys.stdout.write(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m""")
+        else:
+            sys.stdout.write(f"{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m")
+
 
     def warning(self, msg):
-        self._tagged_print(msg, 'WARNING', 'yellow')
+        self._tagged_print('WARNING', msg, format.Warning(), format.Default())
 
     def error(self, msg):
-        self._tagged_print(msg, 'ERROR', 'red')
+        self._tagged_print('WARNING', msg, format.Error(), format.Default())
 
     def success(self, msg):
-        self._tagged_print(msg, 'SUCCESS', 'green')
+        self._tagged_print('WARNING', msg, format.Success(), format.Default())
 
     def fail(self, msg):
-        self._tagged_print(msg, 'FAIL', 'red')
+        self._tagged_print('WARNING', msg, format.Error(), format.Default())
 

@@ -6,9 +6,11 @@ This is my first ever package so be nice please
 ## Contents
 - [Installation](##Installation)
 - [Printing](##Printing)
+  - [Tagged Prints](###Tagged Prints)
 - [Formatting](##Formatting)
   - [Options](###Options)
   - [PPFormat](###PPFormat)
+  - [Presets](###Presets)
 - [Logging](##Logging)
 - [Reporting](##Reporting)
   - [ProgressBar](##ProgressBar)
@@ -36,6 +38,34 @@ For employing different formats pass the fmt argument on call with your desired 
     printer = PrettyPrint.Printer(log_type='txt', timestamps=True) # initialize printer object
     format = PrettyPrint.PPFormat() # initialize formatter object, more info on how to create a formatter in Formatting
     printer('hello world', fmt=format) # call printer to print
+
+### Tagged Prints
+Tagged prints allow you to print a statement(=Tag) in one format and then a message in a different format after, separated by a :.
+To achieve this call the tagged_print function, which takes 4 arguments:
+- tag: String, required = the tag to be printed
+- msg: String, required = the message to follow the tag
+- tag_fmt: PPFormat, required = the format for the tag
+- msg_fmt: PPFormat, optional = the format for the message, if left empty will use the default setting
+
+
+    import PrettyPrint
+    printer = PrettyPrint.Printer(log_type='txt', timestamps=True) # initialize printer object
+    format = PrettyPrint.Warning() # initialize formatter object, more info on how to create a formatter in Formatting
+    printer.tagged_print('hello world', fmt=format) # call printer to print
+
+There are tagged_print presets available:
+- Warning: uses the Warning format preset for the tag (=WARNING)
+- Success: uses the Success format preset for the tag (=SUCCESS)
+- Fail: uses the Error format preset for the tag (=FAIL)
+- Error: uses the Error format preset for the tag (=ERROR)
+
+Each of these functions take one argument:
+- msg: String, required = the message to be printed with the preset tag
+
+
+    import PrettyPrint
+    printer = PrettyPrint.Printer(log_type='txt', timestamps=True) # initialize printer object
+    printer.success('PrettyPrint has been installed correctly') # call printer to print
 
 ## Formatting
 Ansi escape sequences are basically tags that control the text that follows afterward.
@@ -108,6 +138,18 @@ Options is a list of the formatting objects named above in no particular order.
     format = PPFormat([ColourText('black'), ColourBackground('white'), Effect('underlined')]) # initialize formatter object
     printer('hello world', fmt=format) # call printer to print
 
+### Presets
+PrettyPrint comes with a few format presets to speed up the usage.
+- Error: Red, Bold and underlined text
+- Success: Green, Bold and underlined text
+- Warning: Yellow, Bold and underlined text
+
+To use any of the presets simply instantiate a preset object, which will create a ready to use PPFormat object.
+
+    import PrettyPrint
+    preset = PrettyPrint.Warning()
+    printer = PrettyPrint.Printer()
+    printer('warning: something happened', preset)
 
 ## Logging
 Logfiles will be created with the name YMD-H:M_PrettyPrint_Autolog in the script working directory.
