@@ -19,7 +19,7 @@ This is my first ever package so be nice please
 - [Licence](#Licence)
 
 ## Installation
-This project is available on pypi at: https://pypi.org/project/PrettyPrintout/0.0.1/
+This project is available on pypi at: https://pypi.org/project/PrettyPrintout/
 
 To install just run
 
