@@ -57,7 +57,7 @@ class Table:
             self._cell_num = [cell_num]*self.cols
         elif cell_num is None:
             self._cell_num = ['']*self.cols
-        elif isinstance(cell_num, list) and all(isinstance(elem, str) for elem in col_width):
+        elif isinstance(cell_num, list) and all(isinstance(elem, str) for elem in cell_num):
             if len(cell_num) == self.cols:
                 self._cell_num = cell_num
             else:
