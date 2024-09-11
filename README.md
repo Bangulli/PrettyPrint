@@ -15,6 +15,7 @@ This is my first ever package so be nice please
 - [Reporting](#Reporting)
   - [ProgressBar](#ProgressBar)
   - [RunningIndicator](#RunningIndicator)
+  - [Table](#Table)
 - [Licence](#Licence)
 
 ## Installation
@@ -202,6 +203,39 @@ usage:
     while 1:
         indicator()
         time.sleep(0.1)
+
+### Table
+Table offers a simple way to print formatted pandas.DataFrame objects to the console or create a log of tabular data.
+The object is designed to be instantiated before a loop and then add a row of data i.e. a series of data at the end of each iteration.
+Logged data can be accessed at the end by simply accessing the underlying dataframe using Table.df
+
+Arguments:
+- data: pandas.DataFrame, optional, default = None
+  - The underlying dataframe, used in case the loop is used to expand on existing data. The entire table will be printed upon instantiation
+- columns: list, optional, default = None
+  - In case no existing dataframe is used a new one will be instantiated in the table using this argument as columns. Ignored if something is passed for the data argument
+- printer: pp.Printer, optional, default = None
+  - The format printer to be used, if None a new one will be instantiated with default settings. It is recommended to use an existing printer if a log file is used and logging of the table is desired, otherwise the table cant be logged
+- cell_num: String/None/list(String), optional, default = None
+  - The string(s) used to parse numbers into the cells of the table, default will print with two decimal numbers. 
+    - If String: a single formatter used for all cells
+    - If None: default format for all cells
+    - If list of Strings: must be same length as amount of cols, with the corresponding formatter for each column at the index location of the column
+  - Note: Strings cant be parsed by this formatting, pass a '' empty string instead for cells containing strings
+- col_width: Int/None/list(Int), optional, default = None
+  - The width of each column in the printout
+    - If Int: a single size used for all cells
+    - If None: takes the length of the column name for the width
+    - If list of Integers: must be same length as amount of cols, with the corresponding length for each column at the index location of the column
+- cell_fmt: PPFormat/None/list(PPFormat), optional, default = None
+  - The PPFormat used for the content of the cells in the printout
+    - If PPFormat: a single format is used for all cells
+    - If None: the default format is used for all cells
+    - If List of PPFormat: must be same length as amount of cols, with the corresponding format for each column at the index location of the column
+- frame_fmt: PPFormat/None, optional, default = None
+  - The PPFormat used for the frame of the table
+  - Note: It is recommended not to use Effects other than 'bold' here, Colour can be used in all ways
+
 
 ## License
 

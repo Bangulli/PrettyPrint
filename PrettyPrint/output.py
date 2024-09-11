@@ -76,20 +76,20 @@ class Printer:
             raise TypeError(f"Unbrecognized type for message format: {type(msg_fmt)}")
 
         if self.timestamps: #
-            sys.stdout.write(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m""")
+            sys.stdout.write(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m\n""")
         else:
-            sys.stdout.write(f"{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m")
+            sys.stdout.write(f"{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m\n")
 
 
     def warning(self, msg):
-        self._tagged_print('WARNING', msg, format.Warning(), format.Default())
+        self.tagged_print('WARNING', msg, format.Warning(), format.Default())
 
     def error(self, msg):
-        self._tagged_print('WARNING', msg, format.Error(), format.Default())
+        self.tagged_print('WARNING', msg, format.Error(), format.Default())
 
     def success(self, msg):
-        self._tagged_print('WARNING', msg, format.Success(), format.Default())
+        self.tagged_print('WARNING', msg, format.Success(), format.Default())
 
     def fail(self, msg):
-        self._tagged_print('WARNING', msg, format.Error(), format.Default())
+        self.tagged_print('WARNING', msg, format.Error(), format.Default())
 
