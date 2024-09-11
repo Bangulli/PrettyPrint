@@ -236,6 +236,27 @@ Arguments:
   - The PPFormat used for the frame of the table
   - Note: It is recommended not to use Effects other than 'bold' here, Colour can be used in all ways
 
+To add a new series i.e. row to the table call the add_row() function at the end of the loop and pass the new series of data as the argument
+Functions
+- add_row(series): adds a new row of data to the table and prints
+  - series: list
+    - the series of data to add
+
+Usage:
+
+    import pandas as pd
+    import PrettyPrint as pp
+    from PrettyPrint import figures
+    
+    df = pd.DataFrame({'Time': [1, 2], 'Place': [1, 2]})
+    
+    fmt = pp.PPFormat([pp.ColourText('green')])
+    fmt1 = pp.PPFormat([pp.ColourText('red')])
+    printer = pp.Printer()
+    
+    table = figures.Table(columns=df.columns, printer=printer, cell_num=[':.2f', ':.3f'], cell_fmt=fmt, frame_fmt=fmt1, col_width=10)
+    
+    table.add_row([3, 3])
 
 ## License
 
