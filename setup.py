@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.0.3'
+VERSION = '1.0.0'
 DESCRIPTION = 'A simple package that contains a set of useful printing options'
 LONG_DESCRIPTION = 'This Package uses the ANSI escape sequences to format console printouts as well as animations such as a progress bar for use in the console. Furthermore options to automatically create logfiles of each statement printed. See the GitHub repo for more info: https://github.com/Bangulli/PrettyPrint'
 
@@ -20,7 +20,7 @@ setup(
     keywords=['python', 'first package', 'console formatting', 'output', 'logging', 'printing'],
 
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Education",
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 3",

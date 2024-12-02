@@ -85,11 +85,11 @@ class Printer:
         self.tagged_print('WARNING', msg, format.Warning(), format.Default())
 
     def error(self, msg):
-        self.tagged_print('WARNING', msg, format.Error(), format.Default())
+        self.tagged_print('ERROR', msg, format.Error(), format.Default())
 
     def success(self, msg):
-        self.tagged_print('WARNING', msg, format.Success(), format.Default())
+        self.tagged_print('SUCCESS', msg, format.Success(), format.Default())
 
     def fail(self, msg):
-        self.tagged_print('WARNING', msg, format.Error(), format.Default())
+        self.tagged_print('FAIL', msg, format.Error(), format.Default())
 
