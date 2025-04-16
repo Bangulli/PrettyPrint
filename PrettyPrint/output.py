@@ -5,7 +5,7 @@ import time
 
 
 class Printer:
-    def __init__(self, log_type=None, timestamps=False):
+    def __init__(self, log_type=None, timestamps=False, log_prefix=''):
         '''
         Initialize the Outputter. On call takes a text and prints it to console with the specified formatting
         Also logs everything to a file if log_type is {html, txt}
@@ -14,7 +14,7 @@ class Printer:
         '''
         if log_type in ['html', 'txt']:
             self.log_type = log_type
-            filename = time.strftime("%Y%m%d-%H%M")+'_PrettyPrint_Autolog'+'.'+self.log_type
+            filename = f"""{time.strftime("%Y%m%d-%H%M")}_{log_prefix}_PrettyPrint_Autolog.{self.log_type}"""
             self.log = open(filename, 'w')
             if log_type == 'html':
                 html_init_str = '<!DOCTYPE html>\n<html>\n  <head>\n        <title>'+filename+'</title>\n   </head>\n   <body>\n'
@@ -76,9 +76,9 @@ class Printer:
             raise TypeError(f"Unbrecognized type for message format: {type(msg_fmt)}")
 
         if self.timestamps: #
-            sys.stdout.write(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m\n""")
+            self.__call__(f"""{time.strftime("%Y-%m-%d-%H:%M:%S - ")}{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m""")
         else:
-            sys.stdout.write(f"{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m\n")
+            self.__call__(f"{tag_fmt}{tag}\033[0m:{msg_fmt} {msg}\033[0m")
 
 
     def warning(self, msg):
