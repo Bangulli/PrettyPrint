@@ -1,20 +1,28 @@
 import sys
-
+import os
 import PrettyPrint.format as format
 import time
 
 
 class Printer:
-    def __init__(self, log_type=None, timestamps=False, log_prefix=''):
+    def __init__(self, log_type=None, timestamps=False, log_prefix='', location=''):
         '''
         Initialize the Outputter. On call takes a text and prints it to console with the specified formatting
         Also logs everything to a file if log_type is {html, txt}
         :param log_type: the type of logfile created, if None, no file is created. if 'html' formatted html, if 'txt' plain text txt
         :param timestamps: controls whether to print timestamps before each output
         '''
+        if location != '':
+            if os.path.exists(location):
+                if os.path.isdir(location):
+                    pass
+                else:
+                    raise ValueError(f'Got log location path {location} but the path is a file. Needs to be a directory')
+            else:
+                os.mkdir(location)
         if log_type in ['html', 'txt']:
             self.log_type = log_type
-            filename = f"""{time.strftime("%Y%m%d-%H%M")}_{log_prefix}_PrettyPrint_Autolog.{self.log_type}"""
+            filename = f"""{location}/{time.strftime("%Y%m%d-%H%M")}_{log_prefix}_PrettyPrint_Autolog.{self.log_type}"""
             self.log = open(filename, 'w')
             if log_type == 'html':
                 html_init_str = '<!DOCTYPE html>\n<html>\n  <head>\n        <title>'+filename+'</title>\n   </head>\n   <body>\n'
